@@ -1,1 +1,12 @@
-This file was created by PyCharm 1.2 for binding GitHub repository
+Here are some notes on my thinking process when building the Connect Four game.
+
+For the first version I'm using the default 7x6 board as shown in Wikipedia: http://en.wikipedia.org/wiki/Connect_Four 
+
+I'm taking an incremental approach to this, beginning with the minimum viable game, then looking to add features as I go along/
+
+I'm starting with the model of the board, and then the computer player's decision engine and state machine to drive the game. I'll build unit tests for each piece to I can be sure the pieces work once they are brought together.  Once the basic engine is running, I'll build a better engine for extra credit.  The initial version will be held in memory.
+
+If I really get on a roll, I can put the board model and game state in a database so someone can play the computer in a Django app.  I'll already have the logic to play the game in place, and could even potentially set up a site with user accounts where people could  play any two-player board game against each other, swapping out the model and game engine for other games.
+
+But I'm getting ahead of myself.  Time to design and code!
+ 
