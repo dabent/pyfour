@@ -30,8 +30,8 @@ class Board:
 
     def getSpace(self, x, y):
         "Returns an individual space"
-        if x >= Board.maxX or y >= Board.maxY:
-            raise IndexError
+        if x >= Board.maxX or y >= Board.maxY or x < 0 or y < 0:
+            return None
         return self.spaces[x][y]
 
 
@@ -74,16 +74,39 @@ class Board:
                     return False
         return True
 
-    def hasForwardDiagonalWinner(self):
+    def hasWinner(self):
+        for y in range(Board.maxY):
+            for x in range(Board.maxX):
+                if self.spaces[x][y] != Board.emptySpace:
+                    if self.getSpace(x,y) == self.getSpace(x,y+1):
+                        if hasVerticalWinner(x,y):
+                            return self.spaces()
+                    if self.getSpace(x,y) == self.getSpace(x+1,y):
+                        if hasHorizontalWinner(x,y):
+                            return self.spaces()
+                    if self.getSpace(x,y) == self.getSpace(x+1,y+1):
+                        if hasHorizontalWinner(x,y):
+                            return self.getSpace(x, y)
+                    if self.getSpace(x, y) == self.getSpace(x + 1, y - 1) and hasHorizontalWinner(x, y):
+                        return self.getSpace(x, y)
+
+
+    def hasUpwardDiagonalWinner(self, x, y):
         pass
 
-    def hasForwardDiagonalWinner(self):
+    def hasDownwardDiagonalWinner(self, x, y):
         pass
 
-    def hasVerticalWinner(self):
-        pass
+    def hasVerticalWinner(self, x, y):
+        for iy in range(y,Board.maxY):
+            if self.getSpace(x,y) == self.getSpace(x,iy):
+                matchCount = matchCount + 1
+            else:
+                return False
+            if matchCount == 4:
+                return True
 
-    def hasHorizontalWinner(self):
+    def hasHorizontalWinner(self, x, y):
         pass
 
     def __str__(self):
