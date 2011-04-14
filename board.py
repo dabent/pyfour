@@ -74,22 +74,16 @@ class Board:
                     return False
         return True
 
-    def test_hasForwardDiagonalWinner(self):
+    def hasForwardDiagonalWinner(self):
         pass
 
-    def test_hasForwardDiagonalWinner(self):
+    def hasForwardDiagonalWinner(self):
         pass
 
-    def test_hasVerticalWinner(self):
+    def hasVerticalWinner(self):
         pass
 
-    def test_hasHorizontalWinner(self):
-        pass
-
-    def test_hasNoWinner(self):
-        pass
-
-    def test_Tie(self):
+    def hasHorizontalWinner(self):
         pass
 
     def __str__(self):
