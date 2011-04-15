@@ -49,10 +49,35 @@ class TestBoard(unittest.TestCase):
         emptyBoard.setBoard(empty)
         self.assertFalse(emptyBoard.boardFull())
 
+    def test_verticalWin(self):
+        vertical = [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 1, 1],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0]]
+        verticalBoard = board.ConnectFourBoard()
+        verticalBoard.setBoard(vertical)
+        self.assertEqual(verticalBoard.hasWinner(),1)
+
+    def test_horizontalWin(self):
+        horizontal= [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 2, 1, 1, 1],
+                [0, 0, 2, 0, 0, 0],
+                [0, 0, 2, 0, 0, 0],
+                [0, 0, 2, 0, 0, 0]]
+        horizontalBoard = board.ConnectFourBoard()
+        horizontalBoard.setBoard(horizontal)
+        self.assertEqual(horizontalBoard.hasWinner(),2)
+
     def test_win(self):
         pass
 
     def test_draw(self):
         pass
 
-    
+if __name__ == '__main__':
+    unittest.main()

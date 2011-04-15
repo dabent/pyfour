@@ -102,6 +102,7 @@ class ConnectFourBoard(BoardBase):
         pass
 
     def hasVerticalWinner(self, x, y):
+        matchCount = 0
         for iy in range(y,ConnectFourBoard.maxY):
             if self.getSpace(x,y) == self.getSpace(x,iy):
                 matchCount = matchCount + 1
@@ -111,6 +112,7 @@ class ConnectFourBoard(BoardBase):
                 return True
 
     def hasHorizontalWinner(self, x, y):
+        matchCount = 0
         for ix in range(x,ConnectFourBoard.maxX):
             if self.getSpace(x,y) == self.getSpace(ix,y):
                 matchCount = matchCount + 1
@@ -125,10 +127,10 @@ class ConnectFourBoard(BoardBase):
                 if self.spaces[x][y] != ConnectFourBoard.emptySpace:
                     if self.getSpace(x,y) == self.getSpace(x,y+1):
                         if self.hasVerticalWinner(x,y):
-                            return self.spaces()
+                            return self.getSpace(x,y)
                     if self.getSpace(x,y) == self.getSpace(x+1,y):
                         if self.hasHorizontalWinner(x,y):
-                            return self.spaces()
+                            return self.getSpace(x,y)
                     if self.getSpace(x,y) == self.getSpace(x+1,y+1):
                         if self.hasHorizontalWinner(x,y):
                             return self.getSpace(x, y)
