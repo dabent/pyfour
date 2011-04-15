@@ -16,14 +16,14 @@ class TestBoard(unittest.TestCase):
                 [1, 1, 1, 1, 1, 1],
                 [1, 1, 1, 1, 1, 1]]
 
-        dropBoard = board.Board()
+        dropBoard = board.ConnectFourBoard()
         dropBoard.setBoard(drop)
 
-        self.assertIsNotNone(dropBoard.dropTile(4,board.Board.computerMove))
+        self.assertIsNotNone(dropBoard.makeMove(4,board.BoardBase.computerMove))
 
-        self.assertIsNotNone(dropBoard.dropTile(2,board.Board.computerMove))
+        self.assertIsNotNone(dropBoard.makeMove(2,board.BoardBase.computerMove))
 
-        self.assertEqual(dropBoard.dropTile(5,board.Board.computerMove), None)
+        self.assertEqual(dropBoard.makeMove(5,board.BoardBase.computerMove), None)
 
     def test_boardFull(self):
         full = [[1, 1, 1, 1, 1, 1],
@@ -33,7 +33,7 @@ class TestBoard(unittest.TestCase):
                 [1, 1, 1, 1, 1, 1],
                 [1, 1, 1, 1, 1, 1],
                 [1, 1, 1, 1, 1, 1]]
-        fullBoard = board.Board();
+        fullBoard = board.ConnectFourBoard()
         fullBoard.setBoard(full)
         self.assertTrue(fullBoard.boardFull())
 
@@ -45,7 +45,7 @@ class TestBoard(unittest.TestCase):
                 [0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0],
                 [0, 0, 0, 0, 0, 0]]
-        emptyBoard = board.Board();
+        emptyBoard = board.ConnectFourBoard()
         emptyBoard.setBoard(empty)
         self.assertFalse(emptyBoard.boardFull())
 
