@@ -95,11 +95,21 @@ class ConnectFourBoard(BoardBase):
                     return False
         return True
 
-    def hasUpwardDiagonalWinner(self, x, y):
-        pass
-
     def hasDownwardDiagonalWinner(self, x, y):
-        pass
+        if x+3 >= ConnectFourBoard.maxX or y+3 >= ConnectFourBoard.maxY:
+            return False
+        else:
+            return self.getSpace(x,y) == self.getSpace(x+1,y+1) \
+                   and self.getSpace(x,y) == self.getSpace(x+2,y+2)\
+                    and self.getSpace(x,y) == self.getSpace(x+3,y+3)
+
+    def hasUpwardDiagonalWinner(self, x, y):
+        if x+3 >= ConnectFourBoard.maxX or y-3 < 0:
+            return False
+        else:
+            return self.getSpace(x,y) == self.getSpace(x+1,y-1) \
+                   and self.getSpace(x,y) == self.getSpace(x+2,y-2)\
+                    and self.getSpace(x,y) == self.getSpace(x+3,y-3)
 
     def hasVerticalWinner(self, x, y):
         matchCount = 0
@@ -127,15 +137,20 @@ class ConnectFourBoard(BoardBase):
                 if self.spaces[x][y] != ConnectFourBoard.emptySpace:
                     if self.getSpace(x,y) == self.getSpace(x,y+1):
                         if self.hasVerticalWinner(x,y):
+                            print x,y
                             return self.getSpace(x,y)
                     if self.getSpace(x,y) == self.getSpace(x+1,y):
                         if self.hasHorizontalWinner(x,y):
+                            print x,y
                             return self.getSpace(x,y)
                     if self.getSpace(x,y) == self.getSpace(x+1,y+1):
-                        if self.hasHorizontalWinner(x,y):
+                        if self.hasDownwardDiagonalWinner(x,y):
+                            print x,y
                             return self.getSpace(x, y)
-                    if self.getSpace(x, y) == self.getSpace(x + 1, y - 1) and self.hasHorizontalWinner(x, y):
+                    if self.getSpace(x, y) == self.getSpace(x + 1, y - 1) and self.hasUpwardDiagonalWinner(x, y):
+                        print x,y
                         return self.getSpace(x, y)
+        return None
 
     def __str__(self):
         "Pretty print of the ConnectFourBoard"

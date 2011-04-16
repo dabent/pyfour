@@ -73,11 +73,71 @@ class TestBoard(unittest.TestCase):
         horizontalBoard.setBoard(horizontal)
         self.assertEqual(horizontalBoard.hasWinner(),2)
 
+    def test_forwardDiagonalWin(self):
+        diagonal= [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 1, 1, 2, 1],
+                [0, 0, 0, 2, 0, 0],
+                [0, 0, 2, 0, 0, 0],
+                [0, 2, 0, 0, 0, 0]]
+        diagonalBoard = board.ConnectFourBoard()
+        diagonalBoard.setBoard(diagonal)
+        self.assertEqual(diagonalBoard.hasWinner(),2)
+
+    def test_backDiagonalWin(self):
+        diagonal= [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 2, 1, 1, 1],
+                [0, 0, 0, 2, 0, 0],
+                [0, 0, 0, 0, 2, 0],
+                [0, 0, 0, 0, 0, 2]]
+        diagonalBoard = board.ConnectFourBoard()
+        diagonalBoard.setBoard(diagonal)
+        self.assertEqual(diagonalBoard.hasWinner(),2)
+
+    def test_noWin(self):
+        noWin= [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 2, 1, 1, 1],
+                [0, 0, 0, 2, 0, 0],
+                [0, 0, 0, 0, 1, 0],
+                [0, 0, 0, 0, 0, 2]]
+        noWinBoard = board.ConnectFourBoard()
+        noWinBoard.setBoard(nowin)
+        self.assertEqual(noWinBoard.boardFull(),False)
+        self.assertEqual(noWinBoard.hasWinner(),None)
+
     def test_win(self):
-        pass
+        win= [[0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 2],
+                [0, 0, 2, 1, 1, 1],
+                [0, 0, 0, 2, 1, 2],
+                [0, 0, 0, 0, 1, 2],
+                [0, 0, 0, 0, 0, 2]]
+        winBoard = board.ConnectFourBoard()
+        winBoard.setBoard(win)
+        self.assertEqual(winBoard.boardFull(),False)
+        self.assertEqual(winBoard.hasWinner(),1)
 
     def test_draw(self):
-        pass
+        draw= [[1, 2, 1, 2, 1, 2],
+                [2, 2, 1, 2, 1, 2],
+                [1, 1, 1, 2, 2, 2],
+                [2, 1, 2, 1, 2, 1],
+                [2, 2, 2, 1, 2, 2],
+                [1, 2, 1, 2, 1, 1],
+                [1, 2, 1, 2, 2, 2]]
+        drawBoard = board.ConnectFourBoard()
+        drawBoard.setBoard(draw)
+        self.assertEqual(drawBoard.boardFull(),True)
+        self.assertEqual(drawBoard.hasWinner(),None)
 
 if __name__ == '__main__':
-    unittest.main()
+#    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(TestBoard)
+    unittest.TextTestRunner(verbosity=2).run(suite)
+
