@@ -1,4 +1,3 @@
-
 class BoardBase:
     emptySpace = 0
     playerMove = 1
@@ -34,7 +33,8 @@ class ConnectFourBoard(BoardBase):
 
     def __init__(self):
         "Sets up a blank ConnectFourBoard"
-        self.spaces = [[ConnectFourBoard.emptySpace for i in range(ConnectFourBoard.maxY)] for j in range(ConnectFourBoard.maxX)]
+        self.spaces = [[ConnectFourBoard.emptySpace for i in range(ConnectFourBoard.maxY)] for j in
+                       range(ConnectFourBoard.maxX)]
 
     def setSpace(self, x, y, val):
         "Sets an individual space"
@@ -79,14 +79,14 @@ class ConnectFourBoard(BoardBase):
         if self.spaces[x][0] != ConnectFourBoard.emptySpace:
             return None
 
-        for y in range(ConnectFourBoard.maxY-1):
-            if self.spaces[x][y+1] != ConnectFourBoard.emptySpace:
-                self.setSpace(x,y,tile)
-                return x,y
+        for y in range(ConnectFourBoard.maxY - 1):
+            if self.spaces[x][y + 1] != ConnectFourBoard.emptySpace:
+                self.setSpace(x, y, tile)
+                return x, y
 
-        if ConnectFourBoard.emptySpace == self.spaces[x][ConnectFourBoard.maxY-1]:
-            self.setSpace(x,ConnectFourBoard.maxY-1,tile)
-            return x,ConnectFourBoard.maxY-1
+        if ConnectFourBoard.emptySpace == self.spaces[x][ConnectFourBoard.maxY - 1]:
+            self.setSpace(x, ConnectFourBoard.maxY - 1, tile)
+            return x, ConnectFourBoard.maxY - 1
 
     def boardFull(self):
         for y in range(ConnectFourBoard.maxY):
@@ -96,59 +96,51 @@ class ConnectFourBoard(BoardBase):
         return True
 
     def hasDownwardDiagonalWinner(self, x, y):
-        if x+3 >= ConnectFourBoard.maxX or y+3 >= ConnectFourBoard.maxY:
+        if x + 3 >= ConnectFourBoard.maxX or y + 3 >= ConnectFourBoard.maxY:
             return False
         else:
-            return self.getSpace(x,y) == self.getSpace(x+1,y+1) \
-                   and self.getSpace(x,y) == self.getSpace(x+2,y+2)\
-                    and self.getSpace(x,y) == self.getSpace(x+3,y+3)
+            return self.getSpace(x, y) == self.getSpace(x + 1, y + 1)\
+                   and self.getSpace(x, y) == self.getSpace(x + 2, y + 2)\
+            and self.getSpace(x, y) == self.getSpace(x + 3, y + 3)
 
     def hasUpwardDiagonalWinner(self, x, y):
-        if x+3 >= ConnectFourBoard.maxX or y-3 < 0:
+        if x + 3 >= ConnectFourBoard.maxX or y - 3 < 0:
             return False
         else:
-            return self.getSpace(x,y) == self.getSpace(x+1,y-1) \
-                   and self.getSpace(x,y) == self.getSpace(x+2,y-2)\
-                    and self.getSpace(x,y) == self.getSpace(x+3,y-3)
+            return self.getSpace(x, y) == self.getSpace(x + 1, y - 1)\
+                   and self.getSpace(x, y) == self.getSpace(x + 2, y - 2)\
+            and self.getSpace(x, y) == self.getSpace(x + 3, y - 3)
 
     def hasVerticalWinner(self, x, y):
-        matchCount = 0
-        for iy in range(y,ConnectFourBoard.maxY):
-            if self.getSpace(x,y) == self.getSpace(x,iy):
-                matchCount = matchCount + 1
-            else:
-                return False
-            if 4 == matchCount:
-                return True
+        if y + 3 >= ConnectFourBoard.maxY:
+            return False
+        else:
+            return self.getSpace(x, y) == self.getSpace(x, y + 1)\
+                   and self.getSpace(x, y) == self.getSpace(x, y + 2)\
+            and self.getSpace(x, y) == self.getSpace(x, y + 3)
 
     def hasHorizontalWinner(self, x, y):
-        matchCount = 0
-        for ix in range(x,ConnectFourBoard.maxX):
-            if self.getSpace(x,y) == self.getSpace(ix,y):
-                matchCount = matchCount + 1
-            else:
-                return False
-            if 4 == matchCount:
-                return True
+        if x + 3 >= ConnectFourBoard.maxX:
+            return False
+        else:
+            return self.getSpace(x, y) == self.getSpace(x + 1, y)\
+                   and self.getSpace(x, y) == self.getSpace(x + 2, y)\
+            and self.getSpace(x, y) == self.getSpace(x + 3, y)
 
     def hasWinner(self):
         for y in range(ConnectFourBoard.maxY):
             for x in range(ConnectFourBoard.maxX):
                 if self.spaces[x][y] != ConnectFourBoard.emptySpace:
-                    if self.getSpace(x,y) == self.getSpace(x,y+1):
-                        if self.hasVerticalWinner(x,y):
-                            print x,y
-                            return self.getSpace(x,y)
-                    if self.getSpace(x,y) == self.getSpace(x+1,y):
-                        if self.hasHorizontalWinner(x,y):
-                            print x,y
-                            return self.getSpace(x,y)
-                    if self.getSpace(x,y) == self.getSpace(x+1,y+1):
-                        if self.hasDownwardDiagonalWinner(x,y):
-                            print x,y
+                    if self.getSpace(x, y) == self.getSpace(x, y + 1):
+                        if self.hasVerticalWinner(x, y):
+                            return self.getSpace(x, y)
+                    if self.getSpace(x, y) == self.getSpace(x + 1, y):
+                        if self.hasHorizontalWinner(x, y):
+                            return self.getSpace(x, y)
+                    if self.getSpace(x, y) == self.getSpace(x + 1, y + 1):
+                        if self.hasDownwardDiagonalWinner(x, y):
                             return self.getSpace(x, y)
                     if self.getSpace(x, y) == self.getSpace(x + 1, y - 1) and self.hasUpwardDiagonalWinner(x, y):
-                        print x,y
                         return self.getSpace(x, y)
         return None
 
@@ -156,7 +148,7 @@ class ConnectFourBoard(BoardBase):
         "Pretty print of the ConnectFourBoard"
         print "columns  1 2 3 4 5 6 7"
         for y in range(ConnectFourBoard.maxY):
-            print "        " ,
+            print "        ",
             for x in range(ConnectFourBoard.maxX):
                 print self.getSpace(x, y),
             print
