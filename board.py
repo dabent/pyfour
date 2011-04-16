@@ -152,14 +152,17 @@ class ConnectFourBoard(BoardBase):
                         return self.getSpace(x, y)
         return None
 
-    def __str__(self):
+    def prettyPrint(self):
         "Pretty print of the ConnectFourBoard"
-        print "  0 1 2 3 4 5 6"
+        print "columns  1 2 3 4 5 6 7"
         for y in range(ConnectFourBoard.maxY):
-            print y,
+            print "        " ,
             for x in range(ConnectFourBoard.maxX):
                 print self.getSpace(x, y),
             print
+        return str(self.spaces)
+
+    def __str__(self):
         return str(self.spaces)
 
 if __name__ == "__main__":
