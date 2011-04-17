@@ -5,7 +5,7 @@ __author__ = 'Davin'
 
 def gameRunner():
     c4Board = ConnectFourBoard()
-    c4Strategy = C4Easy()
+    c4Strategy = C4Easy(c4Board)
 
     print " Welcome to Python Connect Four"
     print " Enter a column to make a move..."
@@ -15,8 +15,8 @@ def gameRunner():
         move = raw_input("Make your move (q to quit): ")
 
         if move != 'q':
-            if (c4Board.makeMove(int(move), ConnectFourBoard.playerMove)):
-                if (c4Board.hasWinner()):
+            if c4Board.makeMove(int(move)-1, ConnectFourBoard.playerMove):
+                if c4Board.hasWinner():
                     c4Board.prettyPrint()
                     print "YOU WON!"
                     break
@@ -26,9 +26,9 @@ def gameRunner():
             print "Game terminated."
             break
             #Computer's turn
-        c4Strategy.computeMove(c4Board)
+        c4Strategy.computeMove()
         c4Board.prettyPrint()
-        if (c4Board.hasWinner()):
+        if c4Board.hasWinner():
             print "COMPUTER WON!"
             break
 

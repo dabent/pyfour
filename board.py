@@ -10,7 +10,7 @@ class BoardBase:
         "Return the contents of a given space on a board"
         return None
 
-    def setSpace(self, x, y):
+    def setSpace(self, x, y, val):
         "Set the space on a board"
         pass
 
@@ -72,9 +72,6 @@ class ConnectFourBoard(BoardBase):
 
         if x < 0 or x >= ConnectFourBoard.maxX:
             return None
-
-        if tile != ConnectFourBoard.emptySpace and tile != ConnectFourBoard.playerMove and tile != ConnectFourBoard.computerMove:
-            raise ValueError
 
         if self.spaces[x][0] != ConnectFourBoard.emptySpace:
             return None
@@ -144,6 +141,12 @@ class ConnectFourBoard(BoardBase):
                         return self.getSpace(x, y)
         return None
 
+    def spacePlayable(self, x, y):
+        if self.getSpace(x,y) == self.emptySpace and self.getSpace(x, y+1) != self.emptySpace:
+            return True
+        else:
+            return False
+            
     def prettyPrint(self):
         "Pretty print of the ConnectFourBoard"
         print "columns  1 2 3 4 5 6 7"
