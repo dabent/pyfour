@@ -162,7 +162,13 @@ class ConnectFourBoard(BoardBase):
         for y in range(ConnectFourBoard.MAX_Y):
             print "        ",
             for x in range(ConnectFourBoard.MAX_X):
-                print self.get_space(x, y),
+                space = self.get_space(x, y)
+                if space == self.COMPUTER_MOVE:
+                    print 'C',
+                elif space == self.PLAYER_MOVE:
+                    print 'P',
+                else:
+                    print "O",
             print
         return str(self.spaces)
 

@@ -99,7 +99,7 @@ class C4Harder(C4Easy):
             for y in range(ConnectFourBoard.MAX_Y):
                 new_board.set_space(x,y,self.board.get_space(x,y))
 
-        new_board.make_move(row,ConnectFourBoard.COMPUTER_MOVE)
+        new_board.make_move(column,ConnectFourBoard.COMPUTER_MOVE)
         if self.find_group_of_three(ConnectFourBoard.PLAYER_MOVE) is None:
             return False
         else:
