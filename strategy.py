@@ -1,8 +1,13 @@
+"""Handles game play strategies for Connect Four
+games, from easy to hard."""
+
 __author__ = 'Davin'
 from board import ConnectFourBoard
 import random
 
 class StragegyBase:
+    """ Holds the template for a game play engine...
+    compute the next move"""
     def compute_move(self):
         pass
 
