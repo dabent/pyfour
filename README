@@ -10,3 +10,32 @@ If I really get on a roll, I can put the board model and game state in a databas
 
 But I'm getting ahead of myself.  Time to design and code!
  
+UPDATE:
+
+OK, I'm turning in what I've got so far.  I've developed the basic command-line program in Python that plays Connect Four interactively.  It has a standard computer opponent should block a human from winning when able to and a more advanced opponent that goes for the win, and tries to avoid setting up an opponent for an easy win.  The advanced opponent needs more work, but I thought I'd show you the design of what I've got.
+
+I use a "board" class hierarchy to model the game board itself with tests to make sure I've got all the basic board moves right.  Then I developed a strategy hierarchy to support different levels of game play.  Adding another 2-player board game (like Tic-Tac-Toe) would use polymorphism for the board and strategy classes, and higher levels of opponents are added with inheritance.
+
+I developed unit tests for the classes as well.  Given time, I'd adopt a much more detailed test strategy and add more unit tests, but I wanted you to see what I've got.  I'm open to feedback.
+
+I also could tie this to a Django model using and adapter to map the board classes to database entries.
+
+Here are the files:
+
+board.py - the board classes.
+game.py - the game engine
+strategy.py - the comptuer opponent's brains
+testBoard.py - board tests
+testStrategy.py - strategy tests
+
+Here's how to play:
+
+python game.py
+
+That gives you the first move and an easy computer opponent.  The -c flag lets the computer go first and the -h flag gives a harder opponent, so:
+
+python game.py -ch 
+
+Lets a harder computer opponent go first.
+
+Let me know what you think...
